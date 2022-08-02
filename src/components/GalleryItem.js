@@ -4,6 +4,7 @@ function GalleryItem (props) {
     let [View, setView] = useState(false)
 
     const simpleStyle = {
+        'display': 'grid',
         'width': '25vw',
         'height': '20vh',
         'border': '1px solid black',
@@ -18,7 +19,7 @@ function GalleryItem (props) {
         'backgroundImage': `url(${props.item.artworkUrl100})`,
         'backgroundRepeat': 'no-repeat',
         'backgroundSize': 'cover',
-        'color': 'yellow'
+        'color': 'red'
     }
     
   const simpleView = () => {
