@@ -6,18 +6,11 @@ import { SearchContext } from './context/SearchContext';
 import './App.css';
 
 function App() {
-  let [search] = useState('')
   let [message, setMessage] = useState('Search for Music!')
   let [data, setData] = useState([])
   let searchInput = useRef('')
 
   const API_URL = 'https://itunes.apple.com/search?term='
-
-useEffect(() => {
-  if (search){
-    
-  }
-}, [search])
 
 const handleSearch = (e, term) => {
   e.preventDefault()
@@ -26,9 +19,9 @@ const handleSearch = (e, term) => {
     const response = await fetch(API_URL + term)
     const resData = await response.json()
     if (resData.results.length > 0) {
-      setData(resData.results)
+     return setData(resData.results)
     } else {
-      setMessage('Not Found')
+      return setMessage('Not Found')
     }
   }
   fetchData()
