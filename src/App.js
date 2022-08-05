@@ -1,8 +1,9 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, Fragment } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Gallery from './components/Gallery'
-import Searchbar from './components/SearchBar'
-import { DataContext } from './context/DataContext';
-import { SearchContext } from './context/SearchContext';
+import SearchBar from './components/SearchBar'
+import AlbumView from './components/AlbumView';
+import ArtistView from './components/ArtistView';
 import './App.css';
 
 function App() {
@@ -29,16 +30,19 @@ const handleSearch = (e, term) => {
 
   return (
     <div className="App">
-      <SearchContext.Provider value={{term: searchInput, handleSearch: handleSearch}}>
-      <Searchbar />
-      </SearchContext.Provider>
-
       {message}
-      
-      <DataContext.Provider value={data}>
-      <Gallery/>
-      </DataContext.Provider>
-
+          <Router>
+              <Routes>
+                  <Route path="/" element={
+                    <Fragment>
+                      <SearchBar handleSearch = {handleSearch}/>
+                      <Gallery data={data}/>
+                    </Fragment>
+                  }/>
+                  <Route path="/album/:id" element={<AlbumView />} />
+                  <Route path="/artist/:id" element={<ArtistView />} />
+              </Routes>
+          </Router>
     </div>
   );
 }
